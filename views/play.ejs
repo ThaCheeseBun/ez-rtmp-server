@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ez-rtmp-server</title>
+    <script src="/flv.min.js" type="text/javascript"></script>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+      html {
+        min-height: 100%;
+      }
+      body {
+        margin: 0;
+        background: #202020;
+        color: #fff;
+        font-family: 'Ubuntu', sans-serif;
+        height: 100%;
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .hide {
+        display: none !important;
+      }
+      .loading {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .loading img {
+        width: 20vw;
+      }
+      .loading p {
+        text-align: center;
+        margin.top: 10px;
+      }
+      #videoElement {
+        height: 100vh;
+        margin: auto;
+        display: block;
+      }
+      #autoplay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, .3);
+      }
+      #autoplay p {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px;
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need JavaScript enabled to use this page.</noscript>
+
+    <div id="autoplay" class="hide">
+      <p>You need to allow autoplay of both audio and video in order to use this page.</p>
+    </div>
+
+    <div class="loading hide">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjAiIHdpZHRoPSIxNjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMTI4IDE2IiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuNDIiIGQ9Ik02LjQsNC44QTMuMiwzLjIsMCwxLDEsMy4yLDgsMy4yLDMuMiwwLDAsMSw2LjQsNC44Wm0xMi44LDBBMy4yLDMuMiwwLDEsMSwxNiw4LDMuMiwzLjIsMCwwLDEsMTkuMiw0LjhaTTMyLDQuOEEzLjIsMy4yLDAsMSwxLDI4LjgsOCwzLjIsMy4yLDAsMCwxLDMyLDQuOFptMTIuOCwwQTMuMiwzLjIsMCwxLDEsNDEuNiw4LDMuMiwzLjIsMCwwLDEsNDQuOCw0LjhabTEyLjgsMEEzLjIsMy4yLDAsMSwxLDU0LjQsOCwzLjIsMy4yLDAsMCwxLDU3LjYsNC44Wm0xMi44LDBBMy4yLDMuMiwwLDEsMSw2Ny4yLDgsMy4yLDMuMiwwLDAsMSw3MC40LDQuOFptMTIuOCwwQTMuMiwzLjIsMCwxLDEsODAsOCwzLjIsMy4yLDAsMCwxLDgzLjIsNC44Wk05Niw0LjhBMy4yLDMuMiwwLDEsMSw5Mi44LDgsMy4yLDMuMiwwLDAsMSw5Niw0LjhabTEyLjgsMEEzLjIsMy4yLDAsMSwxLDEwNS42LDgsMy4yLDMuMiwwLDAsMSwxMDguOCw0LjhabTEyLjgsMEEzLjIsMy4yLDAsMSwxLDExOC40LDgsMy4yLDMuMiwwLDAsMSwxMjEuNiw0LjhaIi8+PGc+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNLTQyLjcsMy44NEE0LjE2LDQuMTYsMCwwLDEtMzguNTQsOGE0LjE2LDQuMTYsMCwwLDEtNC4xNiw0LjE2QTQuMTYsNC4xNiwwLDAsMS00Ni44Niw4LDQuMTYsNC4xNiwwLDAsMS00Mi43LDMuODRabTEyLjgtLjY0QTQuOCw0LjgsMCwwLDEtMjUuMSw4YTQuOCw0LjgsMCwwLDEtNC44LDQuOEE0LjgsNC44LDAsMCwxLTM0LjcsOCw0LjgsNC44LDAsMCwxLTI5LjksMy4yWm0xMi44LS42NEE1LjQ0LDUuNDQsMCwwLDEtMTEuNjYsOGE1LjQ0LDUuNDQsMCwwLDEtNS40NCw1LjQ0QTUuNDQsNS40NCwwLDAsMS0yMi41NCw4LDUuNDQsNS40NCwwLDAsMS0xNy4xLDIuNTZaIi8+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJ0cmFuc2xhdGUiIHZhbHVlcz0iMjMgMDszNiAwOzQ5IDA7NjIgMDs3NC41IDA7ODcuNSAwOzEwMCAwOzExMyAwOzEyNS41IDA7MTM4LjUgMDsxNTEuNSAwOzE2NC41IDA7MTc4IDAiIGNhbGNNb2RlPSJkaXNjcmV0ZSIgZHVyPSIxMTcwbXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9nPjwvc3ZnPgo=">
+      <p id="loadingtxt">Calling the internet</p>
+    </div>
+
+    <video id="videoElement" class="hide"></video>
+
+    <script type="text/javascript">
+      var randomLoading = () => {
+        var arr = [
+          "Calling the internet",
+          "Reposting bad memes",
+          "Calling techsupport",
+          "Cooking noodles",
+          "Downloading the chunks",
+          "Hacking the mainframe",
+          "Trying to connect",
+          "Loading something idk",
+          "D0WNL04D1NG D4NK M3M35"
+        ];
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      document.querySelector('title').innerText = 'test | ' + document.querySelector('title').innerText;
+
+      document.querySelector('#loadingtxt').innerText = randomLoading() + '...';
+      document.querySelector('.loading').classList.toggle('hide');
+      document.querySelector('#videoElement').classList.toggle('hide');
+
+      var videoElement = document.getElementById('videoElement');
+      var flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        isLive : true,
+        url: 'http://' + window.location.host + '/live/<%=stream%>.flv'
+      });
+      flvPlayer.attachMediaElement(videoElement);
+      flvPlayer.load();
+      flvPlayer.play();
+
+      flvPlayer.on(flvjs.Events.METADATA_ARRIVED, () => {
+        document.querySelector('.loading').classList.toggle('hide');
+
+        if (videoElement.paused) document.querySelector('#autoplay').classList.toggle('hide');
+      });
+    </script>
+  </body>
+</html>

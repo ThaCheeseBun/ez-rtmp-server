@@ -1,34 +1,28 @@
 {
-  "name": "node-media-server",
-  "version": "2.1.6",
-  "description": "A Node.js implementation of RTMP Server",
-  "main": "node_media_server.js",
-  "scripts": {
-    "test": "node app.js"
-  },
+  "name": "ez-rtmp-server",
+  "version": "0.1.1",
+  "description": "A small fork of node-media-server for use locally.",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/illuspas/Node-Media-Server.git"
+    "url": "https://github.com/ThaCheeseBun/ez-rtmp-server.git"
   },
   "keywords": [
     "rtmp",
     "flv",
     "server"
   ],
-  "author": "Mingliang Chen",
+  "author": "ThaCheeseBun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/illuspas/Node-Media-Server/issues"
+    "url": "https://github.com/ThaCheeseBun/ez-rtmp-server/issues"
   },
-  "homepage": "https://github.com/illuspas/Node-Media-Server#readme",
+  "homepage": "https://github.com/ThaCheeseBun/ez-rtmp-server#readme",
   "dependencies": {
-    "basic-auth-connect": "^1.0.0",
-    "chalk": "^2.4.2",
-    "dateformat": "^3.0.3",
+    "colors": "^1.4.0",
+    "ejs": "^3.0.2",
     "express": "^4.16.4",
-    "lodash": ">=4.17.13",
-    "mkdirp": "1.0.3",
-    "ws": "^5.2.2"
+    "ip": "^1.1.5"
   },
   "engines": {
     "node": ">=8.0.0"

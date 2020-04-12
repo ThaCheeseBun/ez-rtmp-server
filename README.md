@@ -1,29 +1,13 @@
 # Node-Media-Server
-[![npm](https://img.shields.io/node/v/node-media-server.svg)](https://nodejs.org/en/)
-[![npm](https://img.shields.io/npm/v/node-media-server.svg)](https://npmjs.org/package/node-media-server)
-[![npm](https://img.shields.io/npm/dm/node-media-server.svg)](https://npmjs.org/package/node-media-server)
-[![npm](https://img.shields.io/npm/l/node-media-server.svg)](LICENSE) 
-[![Join the chat at https://gitter.im/Illuspas/Node-Media-Server](https://badges.gitter.im/Illuspas/Node-Media-Server.svg)](https://gitter.im/Illuspas/Node-Media-Server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-![logo](https://www.nodemedia.cn/uploads/site_logo.png)
+[![!](https://img.shields.io/github/package-json/v/ThaCheeseBun/ez-rtmp-server)](https://github.com/ThaCheeseBun/ez-rtmp-server/releases)
+[![!](https://img.shields.io/github/license/ThaCheeseBun/ez-rtmp-server)](LICENSE)
+[![!](https://img.shields.io/github/repo-size/ThaCheeseBun/ez-rtmp-server)](http://hetasinglar.shop)
 
 A Node.js implementation of RTMP/HTTP-FLV/WS-FLV/HLS/DASH Media Server  
-[中文介绍](https://github.com/illuspas/Node-Media-Server/blob/master/README_CN.md)  
 
-**If you like this project you can support me.**  
-<a href="https://www.buymeacoffee.com/illuspas" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-white.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
-
-# NMSv3
-https://github.com/NodeMedia/NodeMediaServer
-
-# Web Admin Panel Source
-[https://github.com/illuspas/Node-Media-Server-Admin](https://github.com/illuspas/Node-Media-Server-Admin)
-
-# Web Admin Panel Screenshot
-[http://server_ip:8000/admin](http://server_ip:8000/admin)
-
-![admin](https://raw.githubusercontent.com/illuspas/resources/master/img/admin_panel_dashboard.png)
-![preview](https://raw.githubusercontent.com/illuspas/resources/master/img/admin_panel_streams_preview.png)
+# Node-Media-Server
+This project is a fork from [Node-Media-Server](https://github.com/illuspas/Node-Media-Server) by illuspas.
+This is just a smaller and more local streaming focused fork for use with OBS.
 
 # Features
  - Cross platform support Windows/Linux/Unix
@@ -38,12 +22,8 @@ https://github.com/NodeMedia/NodeMediaServer
  - Support Server Monitor
  - Support Rtsp/Rtmp relay
  - Support api control relay
-  
-# Usage 
-## docker version (only_linux_x64)
-```bash
-docker run --name nms -d -p 1935:1935 -p 8000:8000 illuspas/node-media-server
-```
+
+# Usage
 
 ## git version
 ```bash
@@ -110,7 +90,7 @@ URL : rtmp://localhost/live
 Stream key : STREAM_NAME
 
 # Accessing the live stream
-## RTMP 
+## RTMP
 ```
 rtmp://localhost/live/STREAM_NAME
 ```
@@ -308,7 +288,7 @@ nms.on('donePlay', (id, StreamPath, args) => {
 ## Generate certificate
 ```bash
 openssl genrsa -out privatekey.pem 1024
-openssl req -new -key privatekey.pem -out certrequest.csr 
+openssl req -new -key privatekey.pem -out certrequest.csr
 openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem
 ```
 
@@ -346,8 +326,8 @@ wss://localhost:8443/live/STREAM_NAME.flv
 ```
 >In the browser environment, Self-signed certificates need to be added with trust before they can be accessed.
 
-# API 
-## Protected API 
+# API
+## Protected API
 ```
 const config = {
  .......
@@ -356,7 +336,7 @@ const config = {
     api_user: 'admin',
     api_pass: 'nms2018',
   },
- 
+
  ......
 }
 ```
@@ -628,7 +608,7 @@ relay: {
 }
 ```
 
-## Dynamic pull 
+## Dynamic pull
 When the local server receives a play request.
 If the stream does not exist, pull the stream from the configured edge server to local.
 When the stream is not played by the client, it automatically disconnects.
@@ -694,7 +674,3 @@ http://www.nodemedia.cn/products/node-media-player
 * Only 6MB installation package
 
 http://www.nodemedia.cn/products/node-media-client/win
-
-# Thanks
-strive, 树根, 疯狂的台灯, 枫叶, lzq, 番茄, smicroz , 熊科辉, Ken Lee , Erik Herz, Javier Gomez, trustfarm, leeoxiang, Aaron Turner， Anonymous  
-Thank you for your support.
