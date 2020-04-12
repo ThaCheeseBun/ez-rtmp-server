@@ -14,7 +14,7 @@
     "server"
   ],
   "pkg": {
-    "assets": "views/**/*"
+    "assets": "lib/**/*"
   },
   "author": "ThaCheeseBun",
   "license": "MIT",
@@ -24,7 +24,6 @@
   "homepage": "https://github.com/ThaCheeseBun/ez-rtmp-server#readme",
   "dependencies": {
     "colors": "^1.4.0",
-    "ejs": "^3.0.2",
     "express": "^4.16.4",
     "ip": "^1.1.5"
   },

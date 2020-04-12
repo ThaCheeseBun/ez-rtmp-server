@@ -86,7 +86,9 @@
         return arr[Math.floor(Math.random() * arr.length)];
       }
 
-      document.querySelector('title').innerText = 'test | ' + document.querySelector('title').innerText;
+      var stream = location.pathname.split('/')[location.pathname.split('/').length - 1];
+
+      document.querySelector('title').innerText = stream + ' | ' + document.querySelector('title').innerText;
 
       document.querySelector('#loadingtxt').innerText = randomLoading() + '...';
       document.querySelector('.loading').classList.toggle('hide');
@@ -96,7 +98,7 @@
       var flvPlayer = flvjs.createPlayer({
         type: 'flv',
         isLive : true,
-        url: 'http://' + window.location.host + '/live/<%=stream%>.flv'
+        url: 'http://' + window.location.host + '/live/' + stream + '.flv'
       });
       flvPlayer.attachMediaElement(videoElement);
       flvPlayer.load();
