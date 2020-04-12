@@ -7,11 +7,15 @@
     "type": "git",
     "url": "https://github.com/ThaCheeseBun/ez-rtmp-server.git"
   },
+  "bin": "index.js",
   "keywords": [
     "rtmp",
     "flv",
     "server"
   ],
+  "pkg": {
+    "assets": "views/**/*"
+  },
   "author": "ThaCheeseBun",
   "license": "MIT",
   "bugs": {
