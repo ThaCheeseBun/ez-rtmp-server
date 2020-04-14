@@ -27,6 +27,7 @@ This is just a smaller and more local streaming focused fork for use with OBS.
 ## source code
 ```bash
 git clone https://github.com/ThaCheeseBun/ez-rtmp-server.git
+cd ez-rtmp-server
 npm install
 node .
 ```
